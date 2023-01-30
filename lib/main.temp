@@ -1,0 +1,230 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main(){
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.indigoAccent,
+      ),
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+   HomeScreen({super.key});
+
+  String name ='Welcome';
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+     backgroundColor: Colors.white,
+    //  appBar: AppBar(),
+     body: SafeArea(
+      child:Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        Expanded(
+          child: Container(
+          color: Colors.orange,
+          child: Column(children: [
+            Text(
+              name,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Color.fromARGB(255, 7, 221, 43),
+                fontSize: 30,
+                fontWeight: FontWeight.bold    
+                ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              TextButton(onPressed: (){
+              print('Button clicked');
+              
+            }, child: Text('Click Here'),
+            ),
+            IconButton(onPressed: (){}, icon: Icon(Icons.access_time_filled_sharp),),
+            ],),
+            ElevatedButton(onPressed: (){
+              print('Elevated button clicked');
+            }, child: Text('Click Me'))
+          ],),
+              ),
+        ),
+
+
+        Expanded(child: Container(
+          decoration: BoxDecoration(
+            color: Colors.greenAccent,
+            borderRadius: BorderRadius.circular(100),
+            border: Border.all(color: Colors.redAccent,width: 3)
+          ),
+          child: Center(child: Text('this is a small text'),),
+        ),
+        ),
+
+      Expanded(   
+        child: Container(
+          color: Colors.amberAccent,
+          child: Column(children: [
+            Text(
+              name,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.bold    
+                ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              TextButton(onPressed: (){
+              print('Button clicked');
+        
+            }, child: Text('Click Here'),
+            ),
+            IconButton(onPressed: (){}, icon: Icon(Icons.access_time),),
+            ],),
+            ElevatedButton(onPressed: (){
+              print('Elevated button clicked');
+            }, child: Text('Click Me'))
+          ],),
+        ),
+      )
+      ],),
+    ),
+    );
+  }
+}
+
+
+
+
+
+
+
+////////// input and display ////////
+
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main(){
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.indigoAccent
+      ),
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatefulWidget {
+   HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _textController =TextEditingController();
+
+  String _displayText ='Text will be shown here';
+
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Container(
+            color: Colors.yellow[200],
+            child: Column(children: [
+              TextField(
+                controller: _textController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Type here'
+                ),
+              ),
+              ElevatedButton(onPressed: (){
+                //getting data or displaying data
+                  print(_textController.text);
+                  setState(() {
+                     _displayText=_textController.text;
+                  });
+                 
+
+              }, child: Text('Click here')),
+              Text(_displayText),
+            ],),
+          ),
+        ),
+      )
+    );
+  }
+}
+
+
+
+
+//////////////////whatsapp base model////////////
+
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+
+class ListviewSample extends StatelessWidget {
+  const ListviewSample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sample View'),
+        backgroundColor: Colors.greenAccent,
+      ),
+      body: SafeArea(
+        child: ListView.separated(
+          itemBuilder: (ctx, indext) {
+            return ListTile(
+              title: Text('PERSON $indext'),
+              subtitle: Text('This is a message from person $indext'),
+              leading: CircleAvatar(
+                radius: 30,
+                backgroundColor: Colors.lightGreen,
+                backgroundImage:AssetImage('assets/images/thanos.jpg') ,
+              ),
+              trailing: Text('$indext:00 PM'),
+            );
+          },
+          separatorBuilder: (ctx, indext) {
+            return Divider(
+              height: 50,
+            );
+          },
+          itemCount: 50,
+        ),
+      ),
+    );
+  }
+}
